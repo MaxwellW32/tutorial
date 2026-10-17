@@ -22,5 +22,164 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+}
+
+a {
+  text-underline-offset: 3px;
+}
+
+/* --- Lesson prose ---------------------------------------------------------- */
+/* Lesson pages are written with plain HTML tags; these rules give them a readable rhythm. */
+
+.lesson h2 {
+  margin-top: 2.5rem;
+  margin-bottom: 0.75rem;
+  font-size: 1.375rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  scroll-margin-top: 5rem;
+}
+
+.lesson h3 {
+  margin-top: 1.75rem;
+  margin-bottom: 0.5rem;
+  font-size: 1.0625rem;
+  font-weight: 600;
+}
+
+.lesson p {
+  margin: 0.75rem 0;
+  line-height: 1.7;
+}
+
+.lesson ul,
+.lesson ol {
+  margin: 0.75rem 0 0.75rem 1.5rem;
+  line-height: 1.7;
+}
+
+.lesson ul {
+  list-style: disc;
+}
+
+.lesson ol {
+  list-style: decimal;
+}
+
+.lesson li {
+  margin: 0.25rem 0;
+}
+
+.lesson li > p {
+  margin: 0.25rem 0;
+}
+
+.lesson a {
+  text-decoration: underline;
+}
+
+.lesson strong {
+  font-weight: 600;
+}
+
+.lesson :not(pre) > code {
+  font-family: var(--font-mono);
+  font-size: 0.875em;
+  padding: 0.125rem 0.375rem;
+  border-radius: 0.375rem;
+  background: color-mix(in srgb, currentColor 8%, transparent);
+}
+
+.lesson table {
+  margin: 1rem 0;
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9375rem;
+}
+
+.lesson th,
+.lesson td {
+  padding: 0.5rem 0.75rem;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid color-mix(in srgb, currentColor 15%, transparent);
+}
+
+.lesson th {
+  font-weight: 600;
+}
+
+/* --- Code samples (shiki) -------------------------------------------------- */
+
+.code-sample pre {
+  margin: 0;
+  padding: 1rem;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 1.6;
+  tab-size: 2;
+}
+
+/* shiki renders light colours inline and dark colours as CSS variables; switch them in dark mode. */
+@media (prefers-color-scheme: dark) {
+  .code-sample .shiki,
+  .code-sample .shiki span {
+    color: var(--shiki-dark) !important;
+    background-color: var(--shiki-dark-bg) !important;
+    font-style: var(--shiki-dark-font-style) !important;
+    font-weight: var(--shiki-dark-font-weight) !important;
+    text-decoration: var(--shiki-dark-text-decoration) !important;
+  }
+}
+
+/* --- Form controls used by the demos -------------------------------------- */
+
+.field {
+  width: 100%;
+  border-radius: 0.5rem;
+  border: 1px solid color-mix(in srgb, currentColor 25%, transparent);
+  background: transparent;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.9375rem;
+}
+
+.field:focus {
+  outline: 2px solid #7c3aed;
+  outline-offset: 1px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 0.5rem;
+  padding: 0.5rem 0.875rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  background: var(--foreground);
+  color: var(--background);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: opacity 120ms;
+}
+
+.btn:hover {
+  opacity: 0.85;
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: wait;
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--foreground);
+  border-color: color-mix(in srgb, currentColor 30%, transparent);
+}
+
+.btn-outline:hover {
+  background: color-mix(in srgb, currentColor 6%, transparent);
+  opacity: 1;
 }

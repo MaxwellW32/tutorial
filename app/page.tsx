@@ -1,69 +1,72 @@
-import Image from "next/image";
+import Link from "next/link";
+import { lessonHref, lessons } from "@/lib/lessons";
 
-export default function Home() {
+// The home page. It reads no request data and nothing changes between visitors,
+// so Next.js prerenders it into static HTML at build time.
+export default function HomePage() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <div className="mx-auto w-full max-w-5xl px-4 py-12 sm:px-6 sm:py-20">
+      <header className="max-w-2xl">
+        <p className="text-sm font-medium text-violet-600 dark:text-violet-400">Next.js 16 · React 19 · TypeScript</p>
+        <h1 className="mt-3 text-4xl font-semibold tracking-tight sm:text-5xl">Everything you need to know, in one place.</h1>
+        <p className="mt-5 text-lg leading-relaxed text-zinc-600 dark:text-zinc-400">
+          A hands-on tour for someone who knows HTML, CSS and JavaScript. Fifteen short lessons, each with real code from
+          this project and live demos you can click. By the end you will have built sign-in with Google and magic links, a
+          Postgres database, forms, an API and email.
+        </p>
+        <div className="mt-8 flex flex-wrap gap-3">
+          <Link href={lessonHref(lessons[0].slug)} className="btn no-underline">
+            Start with lesson 1 →
+          </Link>
+          <Link href="/login" className="btn btn-outline no-underline">
+            Try the sign-in flow
+          </Link>
+        </div>
+      </header>
+
+      <section className="mt-16">
+        <h2 className="text-sm font-semibold tracking-wide text-zinc-500 uppercase">Lessons</h2>
+        <ol className="mt-4 grid gap-3 sm:grid-cols-2">
+          {lessons.map((lesson, index) => (
+            <li key={lesson.slug}>
+              <Link
+                href={lessonHref(lesson.slug)}
+                className="flex h-full gap-4 rounded-xl border border-zinc-200 p-4 no-underline transition-colors hover:border-zinc-400 hover:bg-zinc-50 dark:border-zinc-800 dark:hover:border-zinc-600 dark:hover:bg-zinc-900"
+              >
+                <span className="font-mono text-sm text-zinc-400 tabular-nums">{String(index + 1).padStart(2, "0")}</span>
+                <span>
+                  <span className="block font-medium">{lesson.title}</span>
+                  <span className="mt-1 block text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">{lesson.summary}</span>
+                </span>
+              </Link>
+            </li>
+          ))}
+        </ol>
+      </section>
+
+      <section className="mt-16 grid gap-6 rounded-xl border border-zinc-200 p-6 sm:grid-cols-3 dark:border-zinc-800">
+        <div>
+          <h3 className="font-medium">How to use it</h3>
+          <p className="mt-1 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
+            Read a lesson, then open the files it names in your editor. Every sample is the real code that powers the demo next
+            to it.
           </p>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+        <div>
+          <h3 className="font-medium">Before you start</h3>
+          <p className="mt-1 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
+            You should be comfortable with HTML, CSS and JavaScript basics: variables, functions, arrays, objects and
+            promises. No React or TypeScript needed.
+          </p>
         </div>
-      </main>
+        <div>
+          <h3 className="font-medium">Break things</h3>
+          <p className="mt-1 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
+            Change a sample, save, and watch the page update. Each lesson ends with small exercises. The dev server tells you
+            when something is wrong.
+          </p>
+        </div>
+      </section>
     </div>
   );
 }

@@ -1,36 +1,57 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Next.js Tutorial
 
-## Getting Started
+A hands-on guide to Next.js 16, React 19 and TypeScript for someone who knows HTML, CSS and JavaScript. Fifteen lessons, each a page in the app with real code from this project and live demos: routing, Server Components, caching, a Postgres database with Drizzle ORM, Server Functions, authentication (Google and magic links via Auth.js + Nodemailer), API routes, email, git and secrets, and shipping.
 
-First, run the development server:
+## Run it
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+cp .env.example .env.local   # fill in the values (see lesson 1 and lesson 14)
+npm run db:push              # create the tables in your Postgres database
+npm run dev                  # http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Sign in with any `@example.com` address to test the magic-link flow without sending email: the link is printed in the terminal.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Command | What it does |
+| --- | --- |
+| `npm run dev` | Development server with hot reload on port 3000 |
+| `npm run build` | Production build (type-checks, prerenders, bundles) |
+| `npm start` | Serve the production build |
+| `npm run lint` | ESLint |
+| `npm run typecheck` | `next typegen && tsc --noEmit` |
+| `npm run db:push` | Make the database match `db/schema.ts` |
+| `npm run db:studio` | Browse the database in the browser |
 
-## Learn More
+## Lessons
 
-To learn more about Next.js, take a look at the following resources:
+1. Setup and project tour
+2. TypeScript for JavaScript developers
+3. React: components, props and state
+4. Routing: pages, layouts and links
+5. Server and Client Components
+6. Styling, fonts, images and metadata
+7. Fetching data, streaming and caching
+8. Database with Drizzle ORM
+9. Server Functions and forms
+10. Authentication: Google and magic links
+11. API routes (Route Handlers)
+12. Sending email with Nodemailer
+13. Putting it together: private notes
+14. Git, GitHub and keeping secrets safe
+15. Shipping: checks, build and deploy
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+The lesson list lives in `lib/lessons.ts`; each lesson is `app/lessons/<slug>/page.tsx`.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Where things are
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```
+app/          routes (pages, layouts, API route handlers)
+actions/      Server Functions ("use server")
+components/   React components; components/demos/ are the live examples in the lessons
+lib/          server helpers: auth, session, mail, data access layer (lib/dal/)
+db/           Drizzle schema and client
+types/        TypeScript declarations (Auth.js session shape)
+```
